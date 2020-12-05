@@ -42,7 +42,7 @@ public class ComumService {
 		}
 	}
 	
-	public Comum updte(Integer id, Comum obj) {
+	public Comum update(Integer id, Comum obj) {
 		Comum entity = repository.getOne(id);
 		updateData(entity, obj);
 		return repository.save(entity);

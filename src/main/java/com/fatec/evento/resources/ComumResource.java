@@ -51,8 +51,8 @@ public class ComumResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Comum> delete(@PathVariable Integer id, @RequestBody Comum obj) {
-		obj = service.updte(id, obj);
+	public ResponseEntity<Comum> update(@PathVariable Integer id, @RequestBody Comum obj) {
+		obj = service.update(id, obj);
 		return ResponseEntity.ok().body(obj);
 	}
 
