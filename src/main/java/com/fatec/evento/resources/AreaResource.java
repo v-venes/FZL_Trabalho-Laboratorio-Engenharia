@@ -52,8 +52,8 @@ public class AreaResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Area> delete(@PathVariable Integer id, @RequestBody Area obj) {
-		obj = service.updte(id, obj);
+	public ResponseEntity<Area> update(@PathVariable Integer id, @RequestBody Area obj) {
+		obj = service.update(id, obj);
 		return ResponseEntity.ok().body(obj);
 	}
 

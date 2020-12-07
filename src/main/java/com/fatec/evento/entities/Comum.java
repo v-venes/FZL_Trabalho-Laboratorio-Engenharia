@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,6 +24,7 @@ public class Comum implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	@Column(unique = true)
 	private String email;
 	private String senha;
 	private String telefone;

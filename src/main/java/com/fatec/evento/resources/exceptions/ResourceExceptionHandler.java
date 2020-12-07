@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.fatec.evento.services.exceptions.DatabaseException;
+import com.fatec.evento.services.exceptions.InvalidLoginException;
 import com.fatec.evento.services.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
@@ -18,6 +19,14 @@ public class ResourceExceptionHandler {
 	@ExceptionHandler(ResourceNotFoundException.class)
 	public ResponseEntity<StandardError> resourceNotFound(ResourceNotFoundException e, HttpServletRequest request) {
 		String error = "Resource not found";
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(InvalidLoginException.class)
+	public ResponseEntity<StandardError> invalidLogin(InvalidLoginException e, HttpServletRequest request) {
+		String error = "Login failed";
 		HttpStatus status = HttpStatus.NOT_FOUND;
 		StandardError err = new StandardError(Instant.now(), status.value(), error, e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(status).body(err);

@@ -42,7 +42,7 @@ public class AreaService {
 		}
 	}
 	
-	public Area updte(Integer id, Area obj) {
+	public Area update(Integer id, Area obj) {
 		Area entity = repository.getOne(id);
 		updateData(entity, obj);
 		return repository.save(entity);

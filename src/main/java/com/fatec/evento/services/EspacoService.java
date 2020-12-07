@@ -1,5 +1,6 @@
 package com.fatec.evento.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,10 +9,13 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.fatec.evento.entities.Area;
 import com.fatec.evento.entities.Espaco;
 import com.fatec.evento.repositories.EspacoRepository;
 import com.fatec.evento.services.exceptions.DatabaseException;
+import com.fatec.evento.services.exceptions.InvalidLoginException;
 import com.fatec.evento.services.exceptions.ResourceNotFoundException;
+import com.fatec.evento.util.Md5;
 
 @Service
 public class EspacoService {
@@ -28,7 +32,26 @@ public class EspacoService {
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
+	public List<Espaco> findByArea(Integer area) {
+		List<Espaco> list = repository.findAll();
+		List<Espaco> list2 = new ArrayList<>();
+		for(Espaco obj : list) {
+			for(Area a : obj.getAreas()) {
+				if(a.getId() == area) {
+					list2.add(obj);
+				}
+			}	
+		}
+		return list2;
+	}
+	
+	public Espaco findByEmailAndSenha(String email, String senha) {
+		Optional<Espaco> obj = Optional.ofNullable(repository.findByEmailAndSenha(email, senha));
+		return obj.orElseThrow(() -> new InvalidLoginException(email, senha));
+	}
+	
 	public Espaco insert(Espaco obj) {
+		obj.setSenha(Md5.criptogrfar(obj.getSenha()));
 		return repository.save(obj);
 	}
 	
@@ -42,7 +65,7 @@ public class EspacoService {
 		}
 	}
 	
-	public Espaco updte(Integer id, Espaco obj) {
+	public Espaco update(Integer id, Espaco obj) {
 		Espaco entity = repository.getOne(id);
 		updateData(entity, obj);
 		return repository.save(entity);

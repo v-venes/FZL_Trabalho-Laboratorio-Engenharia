@@ -6,4 +6,6 @@ import com.fatec.evento.entities.Artista;
 
 public interface ArtistaRepository extends JpaRepository<Artista, Integer> {
 
+	public Artista findByEmailAndSenha(String email, String senha);
+	
 }

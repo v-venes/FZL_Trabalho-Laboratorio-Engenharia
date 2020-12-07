@@ -37,6 +37,12 @@ public class EspacoResource {
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@GetMapping(value = "/area/{areas}")
+	public ResponseEntity<List<Espaco>> findByArea(@PathVariable Integer areas) {
+		List<Espaco> list = service.findByArea(areas);
+		return ResponseEntity.ok().body(list);
+	}
+	
 	@PostMapping
 	public ResponseEntity<Espaco> insert(@RequestBody Espaco obj) {
 		obj = service.insert(obj);
@@ -51,8 +57,17 @@ public class EspacoResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Espaco> delete(@PathVariable Integer id, @RequestBody Espaco obj) {
-		obj = service.updte(id, obj);
+	public ResponseEntity<Espaco> update(@PathVariable Integer id, @RequestBody Espaco obj) {
+		obj = service.update(id, obj);
 		return ResponseEntity.ok().body(obj);
 	}
+	
+	@PostMapping("/login")
+	public ResponseEntity<Espaco> login(@RequestBody Espaco obj) {
+		String email = obj.getEmail();
+		String senha = obj.getSenha();
+		obj = service.findByEmailAndSenha(email, senha);
+		return ResponseEntity.ok().body(obj);
+	}
+	
 }

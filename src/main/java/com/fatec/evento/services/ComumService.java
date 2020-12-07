@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service;
 import com.fatec.evento.entities.Comum;
 import com.fatec.evento.repositories.ComumRepository;
 import com.fatec.evento.services.exceptions.DatabaseException;
+import com.fatec.evento.services.exceptions.InvalidLoginException;
 import com.fatec.evento.services.exceptions.ResourceNotFoundException;
+import com.fatec.evento.util.Md5;
 
 @Service
 public class ComumService {
@@ -28,7 +30,13 @@ public class ComumService {
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
+	public Comum findByEmailAndSenha(String email, String senha) {
+		Optional<Comum> obj = Optional.ofNullable(repository.findByEmailAndSenha(email, senha));
+		return obj.orElseThrow(() -> new InvalidLoginException(email, senha));
+	}
+	
 	public Comum insert(Comum obj) {
+		obj.setSenha(Md5.criptogrfar(obj.getSenha()));
 		return repository.save(obj);
 	}
 	

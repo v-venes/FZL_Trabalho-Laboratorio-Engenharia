@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,8 +26,10 @@ public class Artista implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	@Column(unique = true)
 	private String email;
 	private String senha;
+	private String img;
 	private String telefone;
 	private String cep;
 	private String descricao;
@@ -43,13 +46,14 @@ public class Artista implements Serializable{
 	public Artista() {
 	}
 	
-	public Artista(Integer id, String nome, String email, String senha, String telefone, String cep, String descricao,
+	public Artista(Integer id, String nome, String email, String senha, String img, String telefone, String cep, String descricao,
 			boolean tipo) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
+		this.img = img;
 		this.telefone = telefone;
 		this.cep = cep;
 		this.descricao = descricao;
@@ -86,6 +90,14 @@ public class Artista implements Serializable{
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 	public String getTelefone() {

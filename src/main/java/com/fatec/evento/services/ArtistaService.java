@@ -1,5 +1,6 @@
 package com.fatec.evento.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,10 +9,13 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import com.fatec.evento.entities.Area;
 import com.fatec.evento.entities.Artista;
 import com.fatec.evento.repositories.ArtistaRepository;
 import com.fatec.evento.services.exceptions.DatabaseException;
+import com.fatec.evento.services.exceptions.InvalidLoginException;
 import com.fatec.evento.services.exceptions.ResourceNotFoundException;
+import com.fatec.evento.util.Md5;
 
 @Service
 public class ArtistaService {
@@ -28,7 +32,26 @@ public class ArtistaService {
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
+	public List<Artista> findByArea(Integer area) {
+		List<Artista> list = repository.findAll();
+		List<Artista> list2 = new ArrayList<>();
+		for(Artista obj : list) {
+			for(Area a : obj.getAreas()) {
+				if(a.getId() == area) {
+					list2.add(obj);
+				}
+			}	
+		}
+		return list2;
+	}
+	
+	public Artista findByEmailAndSenha(String email, String senha) {
+		Optional<Artista> obj = Optional.ofNullable(repository.findByEmailAndSenha(email, Md5.criptogrfar(senha)));
+		return obj.orElseThrow(() -> new InvalidLoginException(email, senha));
+	}
+	
 	public Artista insert(Artista obj) {
+		obj.setSenha(Md5.criptogrfar(obj.getSenha()));
 		return repository.save(obj);
 	}
 	
@@ -42,7 +65,7 @@ public class ArtistaService {
 		}
 	}
 	
-	public Artista updte(Integer id, Artista obj) {
+	public Artista update(Integer id, Artista obj) {
 		Artista entity = repository.getOne(id);
 		updateData(entity, obj);
 		return repository.save(entity);

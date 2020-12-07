@@ -24,4 +24,8 @@ public class HistoricoService {
 		Optional<Historico> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
+	
+	public Historico insert(Historico obj) {
+		return repository.save(obj);
+	}
 }

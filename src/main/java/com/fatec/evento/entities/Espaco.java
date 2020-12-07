@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,8 +26,10 @@ public class Espaco implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	@Column(unique = true)
 	private String email;
 	private String senha;
+	private String img;
 	private String telefone;
 	private String endereco;
 	private String descricao;
@@ -44,13 +47,14 @@ public class Espaco implements Serializable{
 	public Espaco() {
 	}
 
-	public Espaco(Integer id, String nome, String email, String senha, String telefone, String endereco,
+	public Espaco(Integer id, String nome, String email, String senha, String img, String telefone, String endereco,
 			String descricao, boolean acessibilidade, boolean setor) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
+		this.img = img;
 		this.telefone = telefone;
 		this.endereco = endereco;
 		this.descricao = descricao;
@@ -90,6 +94,14 @@ public class Espaco implements Serializable{
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public String getImg() {
+		return img;
+	}
+
+	public void setImg(String img) {
+		this.img = img;
 	}
 
 	public String getTelefone() {

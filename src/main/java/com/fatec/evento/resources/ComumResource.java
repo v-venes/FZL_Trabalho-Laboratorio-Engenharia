@@ -55,5 +55,13 @@ public class ComumResource {
 		obj = service.update(id, obj);
 		return ResponseEntity.ok().body(obj);
 	}
+	
+	@PostMapping("/login")
+	public ResponseEntity<Comum> login(@RequestBody Comum obj) {
+		String email = obj.getEmail();
+		String senha = obj.getSenha();
+		obj = service.findByEmailAndSenha(email, senha);
+		return ResponseEntity.ok().body(obj);
+	}
 
 }

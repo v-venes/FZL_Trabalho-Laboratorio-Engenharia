@@ -6,4 +6,6 @@ import com.fatec.evento.entities.Espaco;
 
 public interface EspacoRepository extends JpaRepository<Espaco, Integer> {
 
+	public Espaco findByEmailAndSenha(String email, String senha);
+	
 }

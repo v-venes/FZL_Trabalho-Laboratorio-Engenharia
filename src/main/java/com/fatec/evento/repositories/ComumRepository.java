@@ -6,4 +6,6 @@ import com.fatec.evento.entities.Comum;
 
 public interface ComumRepository extends JpaRepository<Comum, Integer> {
 
+	public Comum findByEmailAndSenha(String email, String senha);
+	
 }
