@@ -42,20 +42,20 @@ public class TestConfig implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Comum c1 = new Comum(null, "Caique", "caique@gmail.com", Md5.criptogrfar("comum1!@#"), "143218761", "08111100");
-		Comum c2 = new Comum(null, "Gustavo", "gustavo@gmail.com", Md5.criptogrfar("comum2!@#"), "243218762", "08222200");
+		Comum c1 = new Comum(null, "Caique", "caique@gmail.com", Md5.criptografar("comum1!@#"), "143218761", "08111100");
+		Comum c2 = new Comum(null, "Gustavo", "gustavo@gmail.com", Md5.criptografar("comum2!@#"), "243218762", "08222200");
 		
 		String img1 = "https://avatars2.githubusercontent.com/u/43397591?s=460&u=d7464a667a9eb129bd752d4e466b59b91a88d08b&v=4";
 		String img2 = "https://avatars3.githubusercontent.com/u/47512206?s=460&u=a4e5fcc7e5ed0b4fab9f574116a7a8233926c854&v=4";
 		
-		Artista a1 = new Artista(null, "Victor Neves", "victor@gmail.com", Md5.criptogrfar("artista1!@#"), img1, "91119911", "09111100", "artista individual 1 com sua descrição", false);
-		Artista a2 = new Artista(null, "Raizer Varela", "raizer@gmail.com", Md5.criptogrfar("artista2!@#"), img2, "92229922", "09222200", "artistas - grupo 2 com sua descrição", true);
+		Artista a1 = new Artista(null, "Victor Neves", "victor@gmail.com", Md5.criptografar("artista1!@#"), img1, "91119911", "09111100", "artista individual 1 com sua descrição", false);
+		Artista a2 = new Artista(null, "Raizer Varela", "raizer@gmail.com", Md5.criptografar("artista2!@#"), img2, "92229922", "09222200", "artistas - grupo 2 com sua descrição", true);
 		
 		String img3 = "https://theatromunicipal.org.br/wp-content/uploads/2015/12/photosphe%CC%80re_lobby-1024x512-1-e1575584495396.jpg";
 		String img4 = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/MASP_Brazil.jpg/300px-MASP_Brazil.jpg";
 		
-		Espaco e1 = new Espaco(null, "Teatro blala", "espaco1@gmail.com", Md5.criptogrfar("espaco1!@#"), img3, "991191119", "Rua A, 01 - São Paulo - SP", "espaco 1 acessível público com sua desrição", true, true);
-		Espaco e2 = new Espaco(null, "Museu uma boa", "espaco2@gmail.com", Md5.criptogrfar("espaco2!@#"), img4, "992292229", "Rua B, 02 - São Paulo - SP", "espaco 2 sem acessibilidade privado com sua desrição", false, false);
+		Espaco e1 = new Espaco(null, "Teatro blala", "espaco1@gmail.com", Md5.criptografar("espaco1!@#"), img3, "991191119", "Rua A, 01 - São Paulo - SP", "espaco 1 acessível público com sua desrição", true, true);
+		Espaco e2 = new Espaco(null, "Museu uma boa", "espaco2@gmail.com", Md5.criptografar("espaco2!@#"), img4, "992292229", "Rua B, 02 - São Paulo - SP", "espaco 2 sem acessibilidade privado com sua desrição", false, false);
 		
 		Historico h1 = new Historico(null, Instant.parse("2020-11-22T19:53:07Z"), c1, e1, null);
 		Historico h2 = new Historico(null, Instant.parse("2020-11-22T20:20:20Z"), c1, null, a1);

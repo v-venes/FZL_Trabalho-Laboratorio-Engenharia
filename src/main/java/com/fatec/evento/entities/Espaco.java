@@ -62,8 +62,6 @@ public class Espaco implements Serializable{
 		this.setor = setor;
 	}
 
-
-
 	public Integer getId() {
 		return id;
 	}

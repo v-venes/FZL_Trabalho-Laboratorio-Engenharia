@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.fatec.evento.entities.Artista;
 import com.fatec.evento.services.ArtistaService;
+import com.fatec.evento.util.Md5;
 
 @RestController
 @RequestMapping(value = "/artistas")

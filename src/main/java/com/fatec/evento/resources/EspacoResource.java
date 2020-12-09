@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.fatec.evento.entities.Espaco;
 import com.fatec.evento.services.EspacoService;
+import com.fatec.evento.util.Md5;
 
 @RestController
 @RequestMapping(value = "/espacos")

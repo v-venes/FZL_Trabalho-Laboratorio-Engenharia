@@ -31,12 +31,12 @@ public class ComumService {
 	}
 	
 	public Comum findByEmailAndSenha(String email, String senha) {
-		Optional<Comum> obj = Optional.ofNullable(repository.findByEmailAndSenha(email, senha));
+		Optional<Comum> obj = Optional.ofNullable(repository.findByEmailAndSenha(email, Md5.criptografar(senha)));
 		return obj.orElseThrow(() -> new InvalidLoginException(email, senha));
 	}
 	
 	public Comum insert(Comum obj) {
-		obj.setSenha(Md5.criptogrfar(obj.getSenha()));
+		obj.setSenha(Md5.criptografar(obj.getSenha()));
 		return repository.save(obj);
 	}
 	
@@ -59,7 +59,7 @@ public class ComumService {
 	private void updateData(Comum entity, Comum obj) {
 		entity.setNome(obj.getNome());
 		entity.setEmail(obj.getEmail());
-		entity.setSenha(obj.getSenha());
+		entity.setSenha(Md5.criptografar(obj.getSenha()));
 		entity.setTelefone(obj.getTelefone());
 		entity.setCep(obj.getCep());
 	}

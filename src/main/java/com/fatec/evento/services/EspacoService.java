@@ -46,12 +46,13 @@ public class EspacoService {
 	}
 	
 	public Espaco findByEmailAndSenha(String email, String senha) {
-		Optional<Espaco> obj = Optional.ofNullable(repository.findByEmailAndSenha(email, senha));
+		Optional<Espaco> obj = Optional.ofNullable(repository.findByEmailAndSenha(email, Md5.criptografar(senha)));
 		return obj.orElseThrow(() -> new InvalidLoginException(email, senha));
 	}
 	
 	public Espaco insert(Espaco obj) {
-		obj.setSenha(Md5.criptogrfar(obj.getSenha()));
+		obj.setSenha(Md5.criptografar(obj.getSenha()));
+		obj.setImg("https://journeypurebowlinggreen.com/wp-content/uploads/2018/05/placeholder-person.jpg");
 		return repository.save(obj);
 	}
 	
@@ -74,7 +75,8 @@ public class EspacoService {
 	private void updateData(Espaco entity, Espaco obj) {
 		entity.setNome(obj.getNome());
 		entity.setEmail(obj.getEmail());
-		entity.setSenha(obj.getSenha());
+		entity.setSenha(Md5.criptografar(obj.getSenha()));
+		entity.setImg(obj.getImg());
 		entity.setTelefone(obj.getTelefone());
 		entity.setEndereco(obj.getEndereco());
 		entity.setDescricao(obj.getDescricao());

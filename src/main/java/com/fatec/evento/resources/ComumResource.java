@@ -17,6 +17,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.fatec.evento.entities.Comum;
 import com.fatec.evento.services.ComumService;
+import com.fatec.evento.util.Md5;
 
 @RestController
 @RequestMapping(value = "/comuns")

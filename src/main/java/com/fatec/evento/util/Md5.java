@@ -5,7 +5,7 @@ import java.security.MessageDigest;
 
 public class Md5 {
 
-	public static String criptogrfar(String senha) {
+	public static String criptografar(String senha) {
 		try {
 			MessageDigest messageDigest = MessageDigest.getInstance("MD5");
 			BigInteger hash = new BigInteger(1, messageDigest.digest(senha.getBytes()));
